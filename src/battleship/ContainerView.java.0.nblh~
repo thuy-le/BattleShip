@@ -1,0 +1,57 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package battleship;
+
+import java.awt.BorderLayout;
+import java.awt.Graphics;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+/**
+ *
+ * @author PC
+ */
+public class ContainerView extends JFrame {
+
+    public static final String strImagePath = "images/background.jpg";
+    ImageIcon background;
+    JPanel jpanel;
+
+    public ContainerView() {
+        
+        //set background for the container
+        background = new ImageIcon(strImagePath);
+        this.setSize(800, 600);
+        jpanel = new JPanel() {
+
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                if (background != null) {
+                    g.drawImage(background.getImage(),
+                            0, 0, getWidth(), getHeight(), null);
+                }
+            }
+        };
+        setContentPane(jpanel);
+        setLayout(new BorderLayout());
+        
+        //computer seasquare panel:
+        JPanel computerPlace = new JPanel();
+        //GlassPanel computerPlace = new GlassPanel(0,0,400,400);
+        for (int i = 0; i < 10; i++) {
+            SeaSquareView gp = new SeaSquareView(10,10,50,50);
+            computerPlace.add(gp);
+        }
+        add(computerPlace, BorderLayout.EAST);
+        
+        
+        
+        setVisible(true);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+    }
+}
